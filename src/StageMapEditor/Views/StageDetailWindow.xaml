@@ -1,0 +1,83 @@
+﻿<Window x:Class="StageMapEditor.Views.StageDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:m="clr-namespace:StageMapEditor.Models"
+        xmlns:v="clr-namespace:StageMapEditor.Views"
+        xmlns:vm="clr-namespace:StageMapEditor.ViewModels"
+        Title="StageDetail"
+        Width="447"
+        Height="210"
+        AllowsTransparency="False"
+        Background="#FFF2F2F2">
+    <Window.Resources>
+        <ResourceDictionary Source="/Controls/MapDetailDictionary.xaml" />
+    </Window.Resources>
+
+    <i:Interaction.Triggers>
+        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction />
+        </l:InteractionMessageTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="61" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="12,6,12,6">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="World：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputWorld, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Stage：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputStage, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="ステージ名：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource BodyLong}" Text="{Binding InputStageName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="ステージ説明：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource BodyLong}" Text="{Binding InputStageDescription, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap">
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" FontWeight="Bold" Foreground="Red" Text="{Binding Error}" TextWrapping="Wrap"  Margin="0,7" />
+                </StackPanel>
+            </StackPanel>
+            
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
+                <Button Command="{Binding SaveCommand}" Content="OK" Style="{StaticResource CommandButton}" />
+                <Button Content="Cencel" Style="{StaticResource CommandButton}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <l:LivetCallMethodAction MethodName="Cancel" MethodTarget="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

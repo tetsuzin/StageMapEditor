@@ -1,0 +1,160 @@
+﻿<Window x:Class="StageMapEditor.Views.ObjectChipWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:StageMapEditor.Views"
+        xmlns:vm="clr-namespace:StageMapEditor.ViewModels"
+        xmlns:m="clr-namespace:StageMapEditor.Models"
+        Title="StageDetail" Height="360" Width="325"
+        Background="#FFF2F2F2" AllowsTransparency="False">
+    <Window.Resources>
+        <ResourceDictionary Source="/Controls/MapDetailDictionary.xaml"></ResourceDictionary>
+    </Window.Resources>
+
+    <i:Interaction.Triggers>
+        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="61"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="12,6,12,6">
+            <StackPanel>
+
+
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="Status：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputStatus, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Param：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputParam, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="SubParam1：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputSubParam1, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="SubParam2：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputSubParam2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+
+
+
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Trigger1：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputTrigger1, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="Action1：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputAction1, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Trigger2：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputTrigger2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="Action2：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputAction2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Trigger3：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputTrigger3, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Grid.Row="6" Grid.Column="2" Content="Action3：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputAction3, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Item1：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputItem1, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="Item2：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputItem2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Item3：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputItem3, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="Item4：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputItem4, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Item5：" Style="{StaticResource Head}" Width="75" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputItem5, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Foreground="Red" FontWeight="Bold" Text="{Binding Error}" HorizontalAlignment="Stretch" Margin="0,7" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
+                <Button Content="OK" Style="{StaticResource CommandButton}" Command="{Binding SaveCommand}" />
+                <Button Content="Cencel" Style="{StaticResource CommandButton}" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

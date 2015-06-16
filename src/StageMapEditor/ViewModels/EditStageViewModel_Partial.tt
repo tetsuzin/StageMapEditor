@@ -1,0 +1,111 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ include file="$(ProjectDir)T4\TemplateMethod.t4" #>
+<#@ output extension=".cs" #>
+<#
+
+Func<Type, string, string> conv = (t, v) =>
+{
+	var mi = t.GetMethods().Where(x => x.Name == "Parse" && x.GetParameters().Length == 1).FirstOrDefault();
+	return mi == null ?
+           "Input" + v :
+		   string.Format("{0}.Parse(Input{1})", t.Name, v);
+};
+
+#>
+using System;
+using System.Collections.Generic;
+using StageMapEditor.Models;
+
+namespace StageMapEditor.ViewModels
+{
+	public partial class EditStageViewModel
+	{
+        private void Initialize()
+        {
+<# foreach (var item in StageModel)
+	{ #>
+			_Input<#= item.Name #> = <#= item.Type.Name == "String" ? "String.Empty" : string.Format("default({0}).ToString()", item.Type.Name) #>;
+<#	} #>
+        }
+
+        private void Initislize(StageModel stageModel)
+        {
+<# foreach (var item in StageModel)
+	{ #>
+			_Input<#= item.Name #> = stageModel.<#= item.Name #>.ToString();
+<#	} #>
+        }
+
+        #region 入力用プロパティ
+	
+<# foreach (var item in StageModel)
+	{ #>
+		private string _Input<#= item.Name #>;
+<#	} #>
+			
+<# foreach (var item in StageModel)
+	{ #>
+		public string Input<#= item.Name #>
+		{
+			get { return _Input<#= item.Name #>; }
+			set
+			{
+				_Input<#= item.Name #> = value;
+<# if(item.Type.Name.ToLower() != "string") { #>
+				var valid = true;
+				<#= item.Type.Name #> _val;
+				valid = <#= item.Type.Name #>.TryParse(value, out _val);
+				if(string.IsNullOrEmpty(value) || !valid)
+<# } else { #>
+				if(string.IsNullOrEmpty(value))
+<# } #>
+				{
+					this["<#= item.Name #>"] = "<#= item.Name #>に正しい値が入力されていません";
+				}
+				else
+				{
+					_errors.Remove("<#= item.Name #>");
+				}
+
+                RaisePropertyChanged("Input<#= item.Name #>");
+                SaveCommand.RaiseCanExecuteChanged();
+			}
+		}
+			
+<#	} #>
+		#endregion
+
+		private List<string> _ErrorList()
+		{
+            var errorPropertyList = new List<string>();
+<# foreach (var item in StageModel)
+	{ #>
+            if (!string.IsNullOrEmpty(this["Input<#= item.Name #>"]))
+            {
+                errorPropertyList.Add("Input<#= item.Name #>");
+            }
+<#	} #>
+		
+			return errorPropertyList;
+		}
+
+		private bool _CanSave()
+		{
+<# foreach (var item in StageModel.Where(x => x.Name != "StageDescription"))
+	{ #>
+            if (string.IsNullOrEmpty(Input<#= item.Name #>))
+            {
+                return false;
+            }
+<#	} #>
+
+			return true;
+		}
+	}
+}

@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{68A8FCDC-4A48-44F9-B10D-5F6CE1EC3DD7}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDXControl", "src\SharpDXControl\SharpDXControl.csproj", "{82333D15-92DA-4ABA-B042-AEE05DD6F5AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StageMapEditor", "src\StageMapEditor\StageMapEditor.csproj", "{148242EE-658C-4193-B709-06A1898D5EA9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1F2F507E-D3B5-4510-A2EE-F050BEA4EC29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82333D15-92DA-4ABA-B042-AEE05DD6F5AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82333D15-92DA-4ABA-B042-AEE05DD6F5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82333D15-92DA-4ABA-B042-AEE05DD6F5AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{82333D15-92DA-4ABA-B042-AEE05DD6F5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82333D15-92DA-4ABA-B042-AEE05DD6F5AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82333D15-92DA-4ABA-B042-AEE05DD6F5AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{148242EE-658C-4193-B709-06A1898D5EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{148242EE-658C-4193-B709-06A1898D5EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{148242EE-658C-4193-B709-06A1898D5EA9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{148242EE-658C-4193-B709-06A1898D5EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{148242EE-658C-4193-B709-06A1898D5EA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{148242EE-658C-4193-B709-06A1898D5EA9}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82333D15-92DA-4ABA-B042-AEE05DD6F5AD} = {1F2F507E-D3B5-4510-A2EE-F050BEA4EC29}
+		{148242EE-658C-4193-B709-06A1898D5EA9} = {1F2F507E-D3B5-4510-A2EE-F050BEA4EC29}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,130 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#
+
+var modelSettings = @"
+
+[MapModel]
+int    : ID
+string : MapName
+string : Background
+int    : MapCellWidth
+int    : MapCellHeight
+int    : BgNo
+int    : BGMNo
+int    : ScrollSpeed
+int    : ScrollAngle
+int    : MapChipType
+int    : TimeLimit
+
+[StageModel]
+int    : World
+int    : Stage
+string : StageName
+string : StageDescription
+
+[MapChip]
+int : ID
+
+[ObjectChip]
+int   : ID
+float : Status
+float : Param
+float : SubParam1
+float : SubParam2
+int   : Trigger1
+int   : Action1
+int   : Trigger2
+int   : Action2
+int   : Trigger3
+int   : Action3
+int   : Item1
+int   : Item2
+int   : Item3
+int   : Item4
+int   : Item5
+
+";
+
+var dic = ObjectModelSettting.Parse(modelSettings);
+
+var MapModel = ObjectModelSettting.ParseObjectParameterSetting(dic, "MapModel");
+var StageModel = ObjectModelSettting.ParseObjectParameterSetting(dic, "StageModel");
+var MapChip = ObjectModelSettting.ParseObjectParameterSetting(dic, "MapChip");
+var ObjectChip = ObjectModelSettting.ParseObjectParameterSetting(dic, "ObjectChip");
+
+#>
+
+<#+
+class TypeName
+{
+	public Type Type { get; set; }
+	public String Name { get; set; }
+	public bool Nullable { get; set; }
+
+	public TypeName(Type t, string n, bool nl = false)
+	{
+		Type = t;
+		Name = n;
+		Nullable = nl;
+	}
+
+	public string Default() { return Type.IsPrimitive ? "0" : ""; }
+
+	public string Conv(string prefix = "Input")
+	{
+		var mi = Type.GetMethods().Where(x => x.Name == "Parse" && x.GetParameters().Length == 1).FirstOrDefault();
+		return mi == null ?
+			   prefix + Name :
+			   string.Format("{0}.Parse({1}{2})", Type.Name, prefix, Name);
+	}
+}
+
+static class ObjectModelSettting
+{
+	public static Dictionary<string, string> Parse(string text)
+	{
+        var groupRegex = new Regex(@"\[([^\]]+)\]([^\[\]]+)?", RegexOptions.Singleline);
+		return groupRegex.Matches(text).Cast<Match>().ToDictionary(m => m.Groups[1].Value, m => m.Groups[2].Value);
+	}
+
+    public static IEnumerable<TypeName> ParseObjectParameterSetting(Dictionary<string, string> dic, string groupName)
+    {
+        if (!dic.ContainsKey(groupName)) { throw new Exception("設定項目に [" + groupName + "] が存在しません"); }
+
+        var lineRegex = new Regex(@"(.+?):(.*)[\r\n]");
+
+		return lineRegex.Matches(dic[groupName]).Cast<Match>().Select(m =>
+		{
+			var typeString = m.Groups[1].Value.Trim();
+			var nullable = typeString.EndsWith("?");
+			var type = GetTypeFromString(typeString.Replace("?", ""));
+			var name = m.Groups[2].Value.Trim();
+			return new TypeName(type, name, nullable);
+		});
+    }
+
+    private static Type GetTypeFromString(string typeName)
+    {
+        var allTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes());
+        return allTypes.First(x =>
+        {
+            var t =
+                typeName == "int" ? "System.Int32" :
+                typeName == "float" ? "System.Single" :
+                typeName == "double" ? "System.Double" :
+                typeName == "decimal" ? "System.Decimal" :
+                typeName == "string" ? "System.String" :
+                typeName;
+            return x.FullName == t || x.AssemblyQualifiedName == t;
+        });
+    }
+}
+
+#>

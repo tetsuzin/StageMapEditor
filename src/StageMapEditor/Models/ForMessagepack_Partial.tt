@@ -1,0 +1,50 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="$(ProjectDir)T4\TemplateMethod.t4" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StageMapEditor.Models
+{
+    /// <summary>
+    /// MessagePack用の保存クラス
+    /// </summary>
+    public partial class StageModelPack
+    {
+<# foreach(var item in StageModel) { #>
+        public <#= item.Type.Name #> <#= item.Name #> { get; set; }
+<# } #>
+    }
+
+    public partial class MapModelPack
+    {
+<# foreach(var item in MapModel) { #>
+<# if(item.Name != "MapCellHeight" && item.Name != "MapCellWidth") { #>
+        public <#= item.Type.Name #> <#= item.Name #> { get; set; }
+<# } #>
+<# } #>
+    }
+
+    [DebuggerDisplay("ID = {ID}")]
+    public partial class MapChipPack
+    {
+<# foreach(var item in MapChip) { #>
+        public <#= item.Type.Name #> <#= item.Name #> { get; set; }
+<# } #>
+    }
+
+    public partial class ObjectChipPack
+    {
+<# foreach(var item in ObjectChip) { #>
+        public <#= item.Type.Name #> <#= item.Name #> { get; set; }
+<# } #>
+    }
+}

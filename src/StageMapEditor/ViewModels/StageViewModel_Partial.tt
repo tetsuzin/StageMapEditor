@@ -1,0 +1,41 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ include file="$(ProjectDir)T4\TemplateMethod.t4" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+
+namespace StageMapEditor.ViewModels
+{
+	public partial class StageViewModel
+	{
+        #region Modelラッパープロパティ
+	
+<# foreach (var item in StageModel)
+	{ #>
+		public <#= item.Type.Name #> <#= item.Name #>
+		{
+			get { return _model.<#= item.Name #>; }
+			set { _model.<#= item.Name #> = value; }
+		}
+			
+<#	} #>
+		#endregion
+	}
+}
+<#+
+public string Conv(dynamic d)
+{
+	Type t = (Type)d.type;
+	var mi = t.GetMethods().Where(x => x.Name == "Parse" && x.GetParameters().Length == 1).FirstOrDefault();
+	return mi == null ?
+           "editViewModel.Input" + d.name :
+		   string.Format("{0}.Parse(editViewModel.Input{1})", d.type.Name, d.name);
+}
+#>

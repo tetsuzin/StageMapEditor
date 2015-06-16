@@ -1,0 +1,15 @@
+﻿[General]
+RenderBackground      : True
+BackGround            : True
+MapChip               : mapChip.png
+MapChipList           : mapChipCode.txt
+ObjectChip            : objectChip.png
+ObjectChipList        : objectChipCode.txt
+ObjectChipPrototype   : objectChipList.txt
+CellSize              : 60
+PalletCellSize        : 20
+ReadTextureFromXNB    : False
+StageDataDirectory    : ./Stage
+ResourceDataDirectory : ./Resource
+DrawCurrentCell       : True
+RenderFrameSecond     : 60

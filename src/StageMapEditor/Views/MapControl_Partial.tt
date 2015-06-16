@@ -1,0 +1,54 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+using System;
+using System.Collections.Generic;
+using System.Windows;
+<#
+var actions =
+	new [] {
+		"MouseWheel",
+		"DeleteKeyPress",
+		"MouseDoubleClick",
+		"MousePositionMoved", "MouseGridPositionMoved",
+		"MouseLeave", "MouseLeftButtonDown", "MouseLeftButtonUp",
+		"MouseMoveWithLeftButtonDown", "MouseMoveWithRightButtonDown",
+		"MouseRightButtonDown"
+	};
+
+#>
+namespace StageMapEditor.Views
+{
+	public partial class MapControl
+	{
+<# foreach(var actionName in actions){ #>
+		#region <#= actionName #> の RoutedEvent
+        public static RoutedEvent <#= actionName #>Event =
+			EventManager.RegisterRoutedEvent("<#= actionName #>", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler <#= actionName #>
+        {
+            add { AddHandler(<#= actionName #>Event, value); }
+            remove { RemoveHandler(<#= actionName #>Event, value); }
+        }
+
+        void Raise<#= actionName #>Event()
+        {
+            var newArgs = new RoutedEventArgs(<#= actionName #>Event);
+            RaiseEvent(newArgs);
+        }
+
+        void Raise<#= actionName #>Event<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(<#= actionName #>Event, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+<# } #>
+	}
+}

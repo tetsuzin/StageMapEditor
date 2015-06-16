@@ -1,0 +1,273 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
+namespace StageMapEditor.Views
+{
+	public partial class MapControl
+	{
+		#region MouseWheel の RoutedEvent
+        public static RoutedEvent MouseWheelEvent =
+			EventManager.RegisterRoutedEvent("MouseWheel", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MouseWheel
+        {
+            add { AddHandler(MouseWheelEvent, value); }
+            remove { RemoveHandler(MouseWheelEvent, value); }
+        }
+
+        void RaiseMouseWheelEvent()
+        {
+            var newArgs = new RoutedEventArgs(MouseWheelEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMouseWheelEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MouseWheelEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region DeleteKeyPress の RoutedEvent
+        public static RoutedEvent DeleteKeyPressEvent =
+			EventManager.RegisterRoutedEvent("DeleteKeyPress", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler DeleteKeyPress
+        {
+            add { AddHandler(DeleteKeyPressEvent, value); }
+            remove { RemoveHandler(DeleteKeyPressEvent, value); }
+        }
+
+        void RaiseDeleteKeyPressEvent()
+        {
+            var newArgs = new RoutedEventArgs(DeleteKeyPressEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseDeleteKeyPressEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(DeleteKeyPressEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region MouseDoubleClick の RoutedEvent
+        public static RoutedEvent MouseDoubleClickEvent =
+			EventManager.RegisterRoutedEvent("MouseDoubleClick", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MouseDoubleClick
+        {
+            add { AddHandler(MouseDoubleClickEvent, value); }
+            remove { RemoveHandler(MouseDoubleClickEvent, value); }
+        }
+
+        void RaiseMouseDoubleClickEvent()
+        {
+            var newArgs = new RoutedEventArgs(MouseDoubleClickEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMouseDoubleClickEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MouseDoubleClickEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region MousePositionMoved の RoutedEvent
+        public static RoutedEvent MousePositionMovedEvent =
+			EventManager.RegisterRoutedEvent("MousePositionMoved", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MousePositionMoved
+        {
+            add { AddHandler(MousePositionMovedEvent, value); }
+            remove { RemoveHandler(MousePositionMovedEvent, value); }
+        }
+
+        void RaiseMousePositionMovedEvent()
+        {
+            var newArgs = new RoutedEventArgs(MousePositionMovedEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMousePositionMovedEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MousePositionMovedEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region MouseGridPositionMoved の RoutedEvent
+        public static RoutedEvent MouseGridPositionMovedEvent =
+			EventManager.RegisterRoutedEvent("MouseGridPositionMoved", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MouseGridPositionMoved
+        {
+            add { AddHandler(MouseGridPositionMovedEvent, value); }
+            remove { RemoveHandler(MouseGridPositionMovedEvent, value); }
+        }
+
+        void RaiseMouseGridPositionMovedEvent()
+        {
+            var newArgs = new RoutedEventArgs(MouseGridPositionMovedEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMouseGridPositionMovedEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MouseGridPositionMovedEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region MouseLeave の RoutedEvent
+        public static RoutedEvent MouseLeaveEvent =
+			EventManager.RegisterRoutedEvent("MouseLeave", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MouseLeave
+        {
+            add { AddHandler(MouseLeaveEvent, value); }
+            remove { RemoveHandler(MouseLeaveEvent, value); }
+        }
+
+        void RaiseMouseLeaveEvent()
+        {
+            var newArgs = new RoutedEventArgs(MouseLeaveEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMouseLeaveEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MouseLeaveEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region MouseLeftButtonDown の RoutedEvent
+        public static RoutedEvent MouseLeftButtonDownEvent =
+			EventManager.RegisterRoutedEvent("MouseLeftButtonDown", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MouseLeftButtonDown
+        {
+            add { AddHandler(MouseLeftButtonDownEvent, value); }
+            remove { RemoveHandler(MouseLeftButtonDownEvent, value); }
+        }
+
+        void RaiseMouseLeftButtonDownEvent()
+        {
+            var newArgs = new RoutedEventArgs(MouseLeftButtonDownEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMouseLeftButtonDownEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MouseLeftButtonDownEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region MouseLeftButtonUp の RoutedEvent
+        public static RoutedEvent MouseLeftButtonUpEvent =
+			EventManager.RegisterRoutedEvent("MouseLeftButtonUp", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MouseLeftButtonUp
+        {
+            add { AddHandler(MouseLeftButtonUpEvent, value); }
+            remove { RemoveHandler(MouseLeftButtonUpEvent, value); }
+        }
+
+        void RaiseMouseLeftButtonUpEvent()
+        {
+            var newArgs = new RoutedEventArgs(MouseLeftButtonUpEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMouseLeftButtonUpEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MouseLeftButtonUpEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region MouseMoveWithLeftButtonDown の RoutedEvent
+        public static RoutedEvent MouseMoveWithLeftButtonDownEvent =
+			EventManager.RegisterRoutedEvent("MouseMoveWithLeftButtonDown", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MouseMoveWithLeftButtonDown
+        {
+            add { AddHandler(MouseMoveWithLeftButtonDownEvent, value); }
+            remove { RemoveHandler(MouseMoveWithLeftButtonDownEvent, value); }
+        }
+
+        void RaiseMouseMoveWithLeftButtonDownEvent()
+        {
+            var newArgs = new RoutedEventArgs(MouseMoveWithLeftButtonDownEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMouseMoveWithLeftButtonDownEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MouseMoveWithLeftButtonDownEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region MouseMoveWithRightButtonDown の RoutedEvent
+        public static RoutedEvent MouseMoveWithRightButtonDownEvent =
+			EventManager.RegisterRoutedEvent("MouseMoveWithRightButtonDown", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MouseMoveWithRightButtonDown
+        {
+            add { AddHandler(MouseMoveWithRightButtonDownEvent, value); }
+            remove { RemoveHandler(MouseMoveWithRightButtonDownEvent, value); }
+        }
+
+        void RaiseMouseMoveWithRightButtonDownEvent()
+        {
+            var newArgs = new RoutedEventArgs(MouseMoveWithRightButtonDownEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMouseMoveWithRightButtonDownEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MouseMoveWithRightButtonDownEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+		#region MouseRightButtonDown の RoutedEvent
+        public static RoutedEvent MouseRightButtonDownEvent =
+			EventManager.RegisterRoutedEvent("MouseRightButtonDown", RoutingStrategy.Bubble,
+											 typeof(RoutedEventHandler), typeof(MapControl));
+
+        public event RoutedEventHandler MouseRightButtonDown
+        {
+            add { AddHandler(MouseRightButtonDownEvent, value); }
+            remove { RemoveHandler(MouseRightButtonDownEvent, value); }
+        }
+
+        void RaiseMouseRightButtonDownEvent()
+        {
+            var newArgs = new RoutedEventArgs(MouseRightButtonDownEvent);
+            RaiseEvent(newArgs);
+        }
+
+        void RaiseMouseRightButtonDownEvent<T>(T args)
+        {
+            var newArgs = new RoutedEventArgs<T>(MouseRightButtonDownEvent, args);
+            RaiseEvent(newArgs);
+        }
+		#endregion
+
+	}
+}

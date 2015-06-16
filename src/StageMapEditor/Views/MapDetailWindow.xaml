@@ -1,0 +1,123 @@
+﻿<Window x:Class="StageMapEditor.Views.MapDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:StageMapEditor.Views"
+        xmlns:vm="clr-namespace:StageMapEditor.ViewModels"
+        xmlns:m="clr-namespace:StageMapEditor.Models"
+        Title="MapDetail" Height="400" Width="380"
+        Background="#FFF2F2F2" AllowsTransparency="False">
+    <Window.Resources>
+        <ResourceDictionary Source="/Controls/MapDetailDictionary.xaml"></ResourceDictionary>
+    </Window.Resources>
+
+    <i:Interaction.Triggers>
+        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
+            <l:WindowInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="61"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="12,6,12,6">
+
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="マップID：" Style="{StaticResource Head}" Width="100" Margin="0,2" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputID, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,6">
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="マップ名：" Style="{StaticResource Head}" Width="100" Margin="0,2" />
+                    <TextBox Style="{StaticResource BodyLong}" Text="{Binding InputMapName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,6" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="Background：" Style="{StaticResource Head}" Width="100" Margin="0,2" />
+                    <TextBox Style="{StaticResource BodyLong}" Text="{Binding InputBackground, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,6" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="横セル数：" Style="{StaticResource Head}" Width="100" Margin="0,2" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputMapCellWidth, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,6" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="縦セル数：" Style="{StaticResource Head}" Width="100" Margin="0,2" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputMapCellHeight, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,6" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="BGNo：" Style="{StaticResource Head}" Width="100" Margin="0,3" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputBgNo, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,7" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="BGMNo：" Style="{StaticResource Head}" Width="100" Margin="0,2" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputBGMNo, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,6" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="スクロールスピード：" Style="{StaticResource Head}" Width="100" Margin="0,2" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputScrollSpeed, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,6" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="スクロール角度：" Style="{StaticResource Head}" Width="100" Margin="0,2" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputScrollAngle, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,6" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="タイム制限：" Style="{StaticResource Head}" Width="100" Margin="0,3" />
+                    <TextBox Style="{StaticResource Body}" Text="{Binding InputTimeLimit, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Margin="0,7" >
+                        <i:Interaction.Behaviors>
+                            <v:TextBoxBehavior PressEnter="{Binding SaveCommand}" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Grid.Row="10" Grid.ColumnSpan="2" TextWrapping="Wrap" Foreground="Red" FontWeight="Bold" Text="{Binding Error}" HorizontalAlignment="Stretch" Margin="0,7" />
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
+                <Button Content="OK" Style="{StaticResource CommandButton}" Command="{Binding SaveCommand}" />
+                <Button Content="Cencel" Style="{StaticResource CommandButton}" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

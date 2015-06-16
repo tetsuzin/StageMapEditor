@@ -1,0 +1,15 @@
+ReadTextureFromXNB：画像ファイルをコンパイル済みのXNBファイルから読み込むか。画像から読み込みたい場合はFalseに
+StageData：ステージデータの保存フォルダエディタ内のStageフォルダに保存したい場合は「./Stage/」とする
+Border：マップのセルの境界線の画像
+MapChip：マップチップの画像シート
+ObjectChip：オブジェクトチップの画像シート
+SelectMap：マップ選択時のに上にかぶせる画像。描画時はα値をいじって半透明になる
+BackGround：背景画像。無い場合は描画しない
+ChipBorder：パレットの境界線
+ChipSelect：パレットの選択時に上にかぶせる画像。描画時はα値をいじって半透明になる
+MapChipList：マップチップがシートの中でどの位置にあるかを表すテキストファイル
+ObjectChipList：オブジェクトチップがシートの中でどの位置にあるかを表すテキストファイル
+ObjectChipPrototype：オブジェクトごとの初期値を表すテキストファイル
+CellSize：マップのセルサイズ
+PaletteCellSize：パレットのセルサイズ
+PaletteLiquidLayout：パレットの並びを横幅に合わせて動的に変更するか。固定の場合はFalse

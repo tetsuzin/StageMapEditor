@@ -1,0 +1,111 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ include file="$(ProjectDir)T4\TemplateMethod.t4" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using StageMapEditor.Models;
+
+namespace StageMapEditor.ViewModels
+{
+    public partial class EditMapViewModel
+    {
+        /// <summary>
+        /// 既存のMapModelからEditMapViewModelを作成
+        /// </summary>
+        /// <param name="model"></param>
+        public EditMapViewModel(MapModel model)
+        {
+            _model = model;
+            _parent = model.StageModel;
+
+<# foreach (var item in MapModel) { #>
+			Input<#= item.Name #> = model.<#= item.Name #>.ToString();
+<#	} #>
+        }
+
+        private void Initialize()
+        {
+<# foreach (var item in MapModel) { #>
+<# if(item.Type.Name.ToLower() == "string") { #>
+			Input<#= item.Name #> = Input<#= item.Name #> ?? "";
+<# } else { #>
+			Input<#= item.Name #> = Input<#= item.Name #> ?? default(<#= item.Type.FullName #>).ToString();
+<# } #>
+<# } #>
+        }
+
+        #region 入力用プロパティ
+	
+<# foreach (var item in MapModel)
+	{ #>
+		private string _Input<#= item.Name #>;			
+<#	} #>
+			
+<# foreach (var item in MapModel)
+	{ #>
+		public string Input<#= item.Name #>
+		{
+			get { return _Input<#= item.Name #>; }
+			set
+			{
+				_Input<#= item.Name #> = value;
+<# if(item.Type.Name.ToLower() == "string") { #>
+	<# if(!item.Nullable) { #>
+				if(string.IsNullOrEmpty(value))
+				{
+					this["<#= item.Name #>"] = "<#= item.Name #>に正しい値が入力されていません";
+				}
+				else
+				{
+					
+					this["<#= item.Name #>"] = null;
+				}
+	<# } #>
+<# } else { #>
+				var valid = true;
+				<#= item.Type.Name #> _val;
+				valid = <#= item.Type#>.TryParse(value, out _val);
+				if(string.IsNullOrEmpty(value) || !valid)
+				{
+					this["<#= item.Name #>"] = "<#= item.Name #>に正しい値が入力されていません";
+				}
+				else
+				{
+					
+					this["<#= item.Name #>"] = null;
+				}
+<# } #>
+
+				RaisePropertyChanged("Input<#= item.Name #>");
+				SaveCommand.RaiseCanExecuteChanged();
+			}
+		}
+			
+<#	} #>
+		#endregion
+
+		private List<string> _ErrorList()
+		{
+            var errorPropertyList = new List<string>();
+<# foreach (var item in MapModel)
+	{ #>
+            if (!string.IsNullOrEmpty(this["Input<#= item.Name #>"]))
+            {
+                errorPropertyList.Add("Input<#= item.Name #>");
+            }
+<#	} #>
+		
+			return errorPropertyList;
+		}
+    }
+}

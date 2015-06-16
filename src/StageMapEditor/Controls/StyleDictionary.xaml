@@ -1,0 +1,56 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Views="clr-namespace:StageMapEditor.Views"
+                    >
+
+    <Style x:Key="GrayBorder" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="#262626" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    
+    <Style x:Key="EmptySplitter" TargetType="{x:Type GridSplitter}">
+        <Setter Property="Background" Value="#D6D6D6" />
+    </Style>
+    
+    <Style x:Key="RulerWPFStyle" TargetType="{x:Type Views:RulerControl}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+    
+    <Style x:Key="MapTabControl" TargetType="{x:Type TabControl}">
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=OneWay, NotifyOnSourceUpdated=True}"></Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+    </Style>
+
+    <Style x:Key="TabCloseButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="2" x:Name="border" BorderBrush="DarkGray" BorderThickness="1">
+                        <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="LightGray" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="8"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        <Setter Property="Width" Value="15"></Setter>
+        <Setter Property="Height" Value="15"></Setter>
+        <Setter Property="Margin" Value="5 0 0 0"></Setter>
+        
+    </Style>
+    
+</ResourceDictionary>
